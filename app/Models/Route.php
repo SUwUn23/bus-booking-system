@@ -2,20 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Route extends Model
 {
-    protected $table = 'routes';
+    use HasFactory;
 
-    protected $fillable = [
-        'from_city',
-        'to_city',
-        'base_price',
-    ];
+    protected $fillable = ['from_city', 'to_city', 'base_price'];
 
-    public function trips(): HasMany
+    public function trips()
     {
         return $this->hasMany(Trip::class);
     }

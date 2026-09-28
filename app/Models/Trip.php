@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Trip extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'route_id',
         'bus_name',
@@ -21,20 +22,19 @@ class Trip extends Model
 
     protected $casts = [
         'departure_date' => 'date',
-        'fare' => 'decimal:2',
     ];
 
-    public function route(): BelongsTo
+    public function route()
     {
         return $this->belongsTo(Route::class);
     }
 
-    public function seats(): HasMany
+    public function seats()
     {
         return $this->hasMany(Seat::class);
     }
 
-    public function bookings(): HasMany
+    public function bookings()
     {
         return $this->hasMany(Booking::class);
     }
